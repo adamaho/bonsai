@@ -12,32 +12,6 @@ interface ButtonContextProps {
 
 const ButtonContext = createContext<ButtonContextProps>();
 
-interface ButtonContextProviderProps {
-  isDisabled: boolean;
-}
-
-const ButtonContextProvider: Component<ButtonContextProviderProps> = ({
-  children,
-  isDisabled,
-}) => {
-  /**
-   * Define a signal that holds the button text
-   */
-  const [buttonText, setButtonText] = createSignal("");
-
-  return (
-    <ButtonContext.Provider
-      value={{
-        isDisabled,
-        buttonText,
-        setButtonText,
-      }}
-    >
-      {children}
-    </ButtonContext.Provider>
-  );
-};
-
 /**
  * Returns the button context
  */
@@ -60,12 +34,28 @@ const ButtonRoot: Component<ButtonRootProps> = ({
   isDisabled = false,
   ref,
 }) => {
+  /**
+   * Define a signal that holds the button text
+   */
+  const [buttonText, setButtonText] = createSignal("");
+
   return (
-    <ButtonContextProvider isDisabled={isDisabled}>
-      <button className={className} ref={ref}>
+    <ButtonContext.Provider
+      value={{
+        isDisabled,
+        buttonText,
+        setButtonText,
+      }}
+    >
+      <button
+        className={className}
+        ref={ref}
+        disabled={isDisabled}
+        aria-label={buttonText()}
+      >
         {children}
       </button>
-    </ButtonContextProvider>
+    </ButtonContext.Provider>
   );
 };
 
@@ -79,9 +69,9 @@ interface ButtonTextProps {
 }
 
 const ButtonText: Component<ButtonTextProps> = ({
-  children,
   className,
   ref,
+  ...props
 }) => {
   /**
    * take the string that is passed as the children and set it in context
@@ -92,12 +82,12 @@ const ButtonText: Component<ButtonTextProps> = ({
    * When the component mounts, set the button text in context
    */
   onMount(() => {
-    buttonContext?.setButtonText(children);
+    buttonContext?.setButtonText(props.children);
   });
 
   return (
     <span className={className} ref={ref}>
-      {children}
+      {props.children}
     </span>
   );
 };
