@@ -1,18 +1,61 @@
-import type { Component } from "solid-js";
+import {createContext, useContext, createSignal, onMount } from "solid-js";
+import type { Component, Setter, Accessor } from "solid-js";
+
+/* -----------------------------------------------------------
+* ButtonContext
+-----------------------------------------------------------**/
+interface ButtonContextProps {
+  isDisabled: boolean;
+  buttonText: Accessor<string>;
+  setButtonText: Setter<string>;
+}
+
+const ButtonContext = createContext<ButtonContextProps>();
+
+interface ButtonContextProviderProps {
+  isDisabled: boolean;
+}
+
+const ButtonContextProvider: Component<ButtonContextProviderProps> = ({ children, isDisabled }) => {
+  /**
+   * Define a signal that holds the button text
+   */
+  const [buttonText, setButtonText] = createSignal("");
+
+  return (
+    <ButtonContext.Provider value={{
+      isDisabled,
+      buttonText,
+      setButtonText
+    }}>
+      {children}
+    </ButtonContext.Provider>
+  );
+};
+
+/**
+ * Returns the button context
+ */
+const useButtonContext = () => {
+  return useContext(ButtonContext);
+}
 
 /* -----------------------------------------------------------
 * ButtonRoot
 -----------------------------------------------------------**/
 interface ButtonRootProps {
   className?: string;
+  isDisabled?: boolean;
   ref?: HTMLButtonElement;
 }
 
-const ButtonRoot: Component<ButtonRootProps> = ({ children, className, ref }) => {
+const ButtonRoot: Component<ButtonRootProps> = ({ children, className, isDisabled = false, ref }) => {
   return (
-    <button className={className} ref={ref}>
-      {children}
-    </button>
+    <ButtonContextProvider isDisabled={isDisabled}>
+      <button className={className} ref={ref}>
+        {children}
+      </button>
+    </ButtonContextProvider>
   );
 };
 
@@ -26,6 +69,19 @@ interface ButtonTextProps {
 }
 
 const ButtonText: Component<ButtonTextProps> = ({ children, className, ref }) => {
+
+  /**
+   * take the string that is passed as the children and set it in context
+   */
+  const buttonContext = useButtonContext(); 
+
+  /**
+   * When the component mounts, set the button text in context
+   */
+  onMount(() => {
+    buttonContext?.setButtonText(children);
+  });
+
   return (
     <span className={className} ref={ref}>
       {children}
