@@ -1,29 +1,19 @@
-import type { Component } from 'solid-js';
+import { Component, onMount } from 'solid-js';
 
 import {Button} from "@bonsai/solid-button";
 
-import logo from './logo.svg';
-import styles from './App.module.css';
+import * as styles from "./App.css";
 
 const App: Component = () => {
+
+  let foo: HTMLButtonElement | undefined;
+
+  onMount(() => {
+    console.log(foo);
+  });
+
   return (
-    <div class={styles.App}>
-      <header class={styles.header}>
-        <img src={logo} class={styles.logo} alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <Button.Root />
-        <a
-          class={styles.link}
-          href="https://github.com/solidjs/solid"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Solid
-        </a>
-      </header>
-    </div>
+    <Button.Root className={styles.button} ref={foo} />
   );
 };
 
