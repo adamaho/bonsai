@@ -1,4 +1,4 @@
-import {createContext, useContext, createSignal, onMount } from "solid-js";
+import { createContext, useContext, createSignal, onMount } from "solid-js";
 import type { Component, Setter, Accessor } from "solid-js";
 
 /* -----------------------------------------------------------
@@ -16,18 +16,23 @@ interface ButtonContextProviderProps {
   isDisabled: boolean;
 }
 
-const ButtonContextProvider: Component<ButtonContextProviderProps> = ({ children, isDisabled }) => {
+const ButtonContextProvider: Component<ButtonContextProviderProps> = ({
+  children,
+  isDisabled,
+}) => {
   /**
    * Define a signal that holds the button text
    */
   const [buttonText, setButtonText] = createSignal("");
 
   return (
-    <ButtonContext.Provider value={{
-      isDisabled,
-      buttonText,
-      setButtonText
-    }}>
+    <ButtonContext.Provider
+      value={{
+        isDisabled,
+        buttonText,
+        setButtonText,
+      }}
+    >
       {children}
     </ButtonContext.Provider>
   );
@@ -38,7 +43,7 @@ const ButtonContextProvider: Component<ButtonContextProviderProps> = ({ children
  */
 const useButtonContext = () => {
   return useContext(ButtonContext);
-}
+};
 
 /* -----------------------------------------------------------
 * ButtonRoot
@@ -49,7 +54,12 @@ interface ButtonRootProps {
   ref?: HTMLButtonElement;
 }
 
-const ButtonRoot: Component<ButtonRootProps> = ({ children, className, isDisabled = false, ref }) => {
+const ButtonRoot: Component<ButtonRootProps> = ({
+  children,
+  className,
+  isDisabled = false,
+  ref,
+}) => {
   return (
     <ButtonContextProvider isDisabled={isDisabled}>
       <button className={className} ref={ref}>
@@ -68,12 +78,15 @@ interface ButtonTextProps {
   ref?: HTMLSpanElement;
 }
 
-const ButtonText: Component<ButtonTextProps> = ({ children, className, ref }) => {
-
+const ButtonText: Component<ButtonTextProps> = ({
+  children,
+  className,
+  ref,
+}) => {
   /**
    * take the string that is passed as the children and set it in context
    */
-  const buttonContext = useButtonContext(); 
+  const buttonContext = useButtonContext();
 
   /**
    * When the component mounts, set the button text in context
@@ -97,7 +110,11 @@ interface ButtonIconProps {
   ref?: HTMLSpanElement;
 }
 
-const ButtonIcon: Component<ButtonIconProps> = ({ children, className, ref }) => {
+const ButtonIcon: Component<ButtonIconProps> = ({
+  children,
+  className,
+  ref,
+}) => {
   return (
     <span className={className} ref={ref}>
       {children}
@@ -108,7 +125,7 @@ const ButtonIcon: Component<ButtonIconProps> = ({ children, className, ref }) =>
 export const Button = {
   Root: ButtonRoot,
   Text: ButtonText,
-  Icon: ButtonIcon
+  Icon: ButtonIcon,
 };
 
 export type { ButtonRootProps, ButtonTextProps, ButtonIconProps };
