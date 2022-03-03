@@ -1,0 +1,6 @@
+{
+  "extends": "@bonsai/tsconfig/app.json",
+  "include": ["./src"],
+  "exclude": ["dist", "build", "node_modules"]
+}
+
