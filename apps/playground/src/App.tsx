@@ -1,18 +1,22 @@
-import { Component, onMount } from "solid-js";
+import { Component } from "solid-js";
 
-import Button from "@bonsai/solid-button";
+import { Button } from "@bonsai/solid-button";
 
 import * as styles from "./App.css";
 
 const App: Component = () => {
   return (
-    <Button.Context>
-      <Button.Root className={styles.button}>
-        <Button.Icon>A</Button.Icon>
-        <Button.Text>hello</Button.Text>
-        <Button.Icon>B</Button.Icon>
+    <div className={styles.app}>
+      <Button.Root isLoading>
+        <Button.Content className={styles.buttonContent}>
+          <Button.Icon className={styles.buttonIcon}>A</Button.Icon>
+          <Button.Text className={styles.buttonText}>hello</Button.Text>
+          <Button.Loading className={styles.buttonLoadingContent}>
+            <span>loading</span>
+          </Button.Loading>
+        </Button.Content>
       </Button.Root>
-    </Button.Context>
+    </div>
   );
 };
 
