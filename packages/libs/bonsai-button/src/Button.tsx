@@ -26,12 +26,24 @@ export const ButtonContext = createContext<ButtonContextProps>([
   },
 ]);
 
-interface ButtonRootProps {
+/**
+ * Returns the button context
+ */
+const useButtonContext = () => {
+  return useContext(ButtonContext);
+};
+
+/* -----------------------------------------------------------
+* Button
+-----------------------------------------------------------**/
+interface ButtonProps {
+  className?: string;
   isDisabled?: boolean;
   isLoading?: boolean;
+  ref?: HTMLButtonElement;
 }
 
-const ButtonRoot: Component<ButtonRootProps> = (props) => {
+const Button: Component<ButtonProps> = (props) => {
   /**
    * Define a store for the button
    */
@@ -54,41 +66,17 @@ const ButtonRoot: Component<ButtonRootProps> = (props) => {
   ];
   return (
     <ButtonContext.Provider value={store}>
-      {props.children}
+      <button
+        className={props?.className}
+        ref={props?.ref}
+        data-state-loading={state.isLoading}
+        disabled={state.isDisabled}
+        aria-disabled={state.isDisabled ?? undefined}
+        aria-label={state.buttonText}
+      >
+        {props.children}
+      </button>
     </ButtonContext.Provider>
-  );
-};
-
-/**
- * Returns the button context
- */
-const useButtonContext = () => {
-  return useContext(ButtonContext);
-};
-
-/* -----------------------------------------------------------
-* ButtonContent
------------------------------------------------------------**/
-interface ButtonContentProps {
-  className?: string;
-  isDisabled?: boolean;
-  ref?: HTMLButtonElement;
-}
-
-const ButtonContent: Component<ButtonContentProps> = (props) => {
-  const [state] = useButtonContext();
-
-  return (
-    <button
-      className={props?.className}
-      ref={props?.ref}
-      data-state-loading={state.isLoading}
-      disabled={state.isDisabled}
-      aria-disabled={state.isDisabled ?? undefined}
-      aria-label={state.buttonText}
-    >
-      {props.children}
-    </button>
   );
 };
 
@@ -146,7 +134,6 @@ interface ButtonLoadingProps {
 }
 
 const ButtonLoading: Component<ButtonLoadingProps> = (props) => {
-
   /**
    * subscribe to the button context
    */
@@ -166,18 +153,27 @@ const ButtonLoading: Component<ButtonLoadingProps> = (props) => {
   );
 };
 
-export const Button = {
-  Root: ButtonRoot,
-  Content: ButtonContent,
-  Icon: ButtonIcon,
-  Text: ButtonText,
-  Loading: ButtonLoading,
+const Root = Button;
+const Text = ButtonText;
+const Icon = ButtonIcon;
+const Loading = ButtonLoading;
+
+export {
+  Button,
+  ButtonText,
+  ButtonIcon,
+  ButtonLoading,
+  // ------------
+  Root,
+  Icon,
+  Text,
+  Loading,
   useButtonContext,
 };
 
 export type {
-  ButtonRootProps,
-  ButtonContentProps,
+  ButtonProps,
   ButtonTextProps,
   ButtonIconProps,
+  ButtonLoadingProps,
 };

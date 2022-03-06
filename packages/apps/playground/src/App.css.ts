@@ -17,25 +17,25 @@ export const buttonContent = style({
   position: "relative",
   selectors: {
     "&[data-state-loading='true']": {
-      backgroundColor: "red"
-    }
-  }
+      backgroundColor: "red",
+    },
+  },
 });
 
 export const buttonIcon = style({
   selectors: {
     [`${buttonContent}[data-state-loading='true'] &`]: {
-      display: "none"
-    }
-  }
+      display: "none",
+    },
+  },
 });
 
 export const buttonText = style({
   selectors: {
     [`${buttonContent}[data-state-loading='true'] &`]: {
-      display: "none"
-    }
-  }
+      display: "none",
+    },
+  },
 });
 
 export const buttonLoadingContent = style({
@@ -46,5 +46,5 @@ export const buttonLoadingContent = style({
   left: 0,
   position: "absolute",
   top: 0,
-  width: "100%"
+  width: "100%",
 });

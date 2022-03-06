@@ -18,7 +18,7 @@ importers:
       '@bonsai/tsconfig': workspace:*
       '@vanilla-extract/css': ^1.6.8
       '@vanilla-extract/vite-plugin': ^3.1.2
-      solid-js: ^1.3.7
+      solid-js: 1.3.9
       typescript: ^4.5.5
       vite: ^2.8.0
       vite-plugin-solid: ^2.2.5
@@ -45,17 +45,12 @@ importers:
   packages/libs/bonsai-button:
     specifiers:
       '@bonsai/tsconfig': workspace:*
-      solid-js: ^1.3.7
-      typescript: ^4.5.5
-      vite: ^2.8.0
-      vite-plugin-solid: ^2.2.5
-    dependencies:
       solid-js: 1.3.9
+      typescript: ^4.5.5
     devDependencies:
       '@bonsai/tsconfig': link:../../configs/tsconfig
+      solid-js: 1.3.9
       typescript: 4.6.2
-      vite: 2.8.6
-      vite-plugin-solid: 2.2.5
 
 packages:
 
