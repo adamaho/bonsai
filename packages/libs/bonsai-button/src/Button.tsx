@@ -64,6 +64,7 @@ const Button: Component<ButtonProps> = (props) => {
       },
     },
   ];
+
   return (
     <ButtonContext.Provider value={store}>
       <button

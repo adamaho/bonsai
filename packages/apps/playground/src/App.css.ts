@@ -4,15 +4,21 @@ export const app = style({
   alignItems: "center",
   backgroundColor: "black",
   display: "flex",
+  flexDirection: "column",
+  gap: "24px",
   height: "100vh",
   justifyContent: "center",
 });
 
-export const buttonContent = style({
+export const button = style({
+  alignItems: "center",
   backgroundColor: "#FFF",
-  border: "1px solid red",
+  border: "none",
   borderRadius: "8px",
+  display: "flex",
+  gap: "8px",
   height: "42px",
+  justifyContent: "center",
   padding: "0 24px",
   position: "relative",
   selectors: {
@@ -23,16 +29,18 @@ export const buttonContent = style({
 });
 
 export const buttonIcon = style({
+  width: "20px",
   selectors: {
-    [`${buttonContent}[data-state-loading='true'] &`]: {
+    [`${button}[data-state-loading='true'] &`]: {
       display: "none",
     },
   },
 });
 
 export const buttonText = style({
+  fontSize: "16px",
   selectors: {
-    [`${buttonContent}[data-state-loading='true'] &`]: {
+    [`${button}[data-state-loading='true'] &`]: {
       display: "none",
     },
   },
