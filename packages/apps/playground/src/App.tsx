@@ -11,11 +11,6 @@ const App: Component = () => {
   const [isLoading, setLoading] = createSignal(false);
   const [isDisabled, setDisabled] = createSignal(false);
 
-  createEffect(() => {
-    console.log("isLoading", isLoading());
-    console.log("isDisabled", isDisabled());
-  });
-
   return (
     <div className={styles.app}>
       <Button.Root className={styles.button} isLoading={isLoading()} isDisabled={isDisabled()}>
