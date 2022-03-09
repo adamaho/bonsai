@@ -30,7 +30,6 @@
     }
   ]);
 
-
   /**
    * When isLoading changes, update the store and context
   */
