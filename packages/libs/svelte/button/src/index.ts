@@ -7,5 +7,5 @@ export const Button = {
   Root: ButtonRoot,
   Text: ButtonText,
   Icon: ButtonIcon,
-  Loading: ButtonLoading
+  Loading: ButtonLoading,
 };

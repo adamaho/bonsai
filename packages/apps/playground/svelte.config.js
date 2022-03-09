@@ -1,7 +1,7 @@
 import adapter from '@sveltejs/adapter-auto';
 import preprocess from 'svelte-preprocess';
 
-import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
+import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {

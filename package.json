@@ -10,12 +10,13 @@
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\" && turbo run format",
     "clean": "turbo run clean"
   },
   "devDependencies": {
     "eslint": "^8.10.0",
     "prettier": "^2.5.1",
+    "prettier-plugin-svelte": "^2.5.0",
     "turbo": "latest"
   },
   "engines": {

@@ -5,6 +5,8 @@
    * Define props
    */
   export let text: string;
+  let klass: string = "";
+  export { klass as class };
 
   /** Get the button context */
   const [, {setButtonText}] = getContext("bonsaiButtonContext");
@@ -17,6 +19,6 @@
   });
 </script>
 
-<span>
+<span class={klass}>
   {text}
 </span>

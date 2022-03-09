@@ -1,32 +1,37 @@
 <script type="ts">
-  import {Button} from "@bonsai/svelte-button";
+	import { Button } from '@bonsai/svelte-button';
 
-  import * as styles from "./index.css";
+	import Bookmark from '../components/Bookmark.svelte';
 
-  let isDisabled = false;
-  let isLoading = false;
+	import * as styles from './index.css';
 
-  const handleDisable = () => {
-    isDisabled = !isDisabled;
-  };
+	let isDisabled = false;
+	let isLoading = false;
 
-  const handleLoading = () => {
-    isLoading = !isLoading;
-  };
+	const handleDisable = () => {
+		isDisabled = !isDisabled;
+	};
+
+	const handleLoading = () => {
+		isLoading = !isLoading;
+	};
 </script>
 
 <svelte:head>
-  <title>Bonsai Playground</title>
+	<title>Bonsai Playground</title>
 </svelte:head>
 
-<Button.Root class={styles.button} isDisabled={isDisabled} isLoading={isLoading}>
-  <Button.Text text="hello world" />
-  <Button.Loading>
-    loading
-  </Button.Loading>
-</Button.Root>
+<div class={styles.buttonContainer}>
+	<Button.Root class={styles.button} {isDisabled} {isLoading}>
+		<Button.Icon class={styles.buttonIcon}>
+			<Bookmark />
+		</Button.Icon>
+		<Button.Text class={styles.buttonText} text="Bookmark" />
+		<Button.Loading class={styles.buttonLoading} />
+	</Button.Root>
+</div>
 
 <div>
-  <button on:click={handleLoading}>set loading</button>
-  <button on:click={handleDisable}>set disabled</button>
+	<button on:click={handleLoading}>set loading</button>
+	<button on:click={handleDisable}>set disabled</button>
 </div>
