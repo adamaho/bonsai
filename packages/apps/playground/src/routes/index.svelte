@@ -22,7 +22,13 @@
 </svelte:head>
 
 <div class={styles.buttonContainer}>
-	<Button.Root class={styles.button} {isDisabled} {isLoading}>
+	<Button.Root
+		class={styles.button}
+		{isDisabled}
+		{isLoading}
+		on:click={() => console.log('asdsd')}
+		on:blur={() => console.log('blurrr')}
+	>
 		<Button.Icon class={styles.buttonIcon}>
 			<Bookmark />
 		</Button.Icon>

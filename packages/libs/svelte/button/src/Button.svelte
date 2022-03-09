@@ -36,6 +36,9 @@
   $: {
     $_isLoading = isLoading;
   }
+
+
+  console.log($$restProps);
 </script>
 
 <button
@@ -43,6 +46,10 @@
   disabled={isDisabled} 
   aria-label={$_buttonText}
   data-state-loading={isLoading}
+  on:click
+  on:focus
+  on:blur
+  {...$$restProps}
 >
   <slot />
 </button>
