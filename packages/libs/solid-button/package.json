@@ -1,0 +1,15 @@
+{
+  "name": "@bonsai/solid-button",
+  "version": "0.0.1",
+  "description": "A solid implementation of a button component",
+  "typings": "src/index.ts",
+  "main": "src/index.ts",
+  "scripts": {
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "solid-js": "1.3.8",
+    "typescript": "^4.5.5"
+  }
+}

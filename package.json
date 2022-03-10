@@ -11,7 +11,7 @@
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\" && turbo run format",
-    "clean": "turbo run clean"
+    "clean": "turbo run clean && rm -rf node_modules"
   },
   "devDependencies": {
     "eslint": "^8.10.0",
