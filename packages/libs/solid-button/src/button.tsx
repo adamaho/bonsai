@@ -2,11 +2,10 @@ import { Component, createContext, onMount, useContext } from "solid-js";
 
 const ButtonContext = createContext();
 
-const ButtonContextProvider: Component = ({ children }) => {
-  const foo = "bar";
+const ButtonContextProvider: Component = (props) => {
   return (
-    <ButtonContext.Provider value={{ foo }}>
-      {children}
+    <ButtonContext.Provider value={{ foo: "bar" }}>
+      {props.children}
     </ButtonContext.Provider>
   );
 };
@@ -15,17 +14,19 @@ const useButtonContext = () => {
   return useContext(ButtonContext);
 }
 
-const Button: Component = ({ children }) => {
+const Button: Component = (props) => {
   return (
     <button>
-      {children}
+      {props.children}
     </button>
   );
 };
 
-const ButtonText: Component = ({ children }) => {
+const ButtonText: Component = (props) => {
 
   const context = useButtonContext();
+
+  // expect this context to not be undefined.
 
   onMount(() => {
     console.log(context);
@@ -33,7 +34,7 @@ const ButtonText: Component = ({ children }) => {
 
   return (
     <span>
-      {children}
+      {props.children}
     </span>
   );
 };
