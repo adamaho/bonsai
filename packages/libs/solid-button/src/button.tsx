@@ -16,9 +16,11 @@ const useButtonContext = () => {
 
 const Button: Component = (props) => {
   return (
-    <button>
-      {props.children}
-    </button>
+    <ButtonContextProvider>
+      <button>
+        {props.children}
+      </button>
+    </ButtonContextProvider>
   );
 };
 
@@ -41,14 +43,11 @@ const ButtonText: Component = (props) => {
 
 const Root = Button;
 const Text = ButtonText;
-const Context = ButtonContextProvider;
 
 export {
-  ButtonContextProvider,
   Button,
   ButtonText,
   //
-  Context,
   Root,
   Text
 };
