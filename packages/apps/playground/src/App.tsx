@@ -1,14 +1,12 @@
-import type { Component } from 'solid-js';
+import type { Component } from "solid-js";
 
-import { Button, ButtonText } from "@bonsai/solid-button"; 
+import { Button, ButtonText } from "@bonsai/solid-button";
 
 const App: Component = () => {
   return (
-      <Button>
-        <ButtonText>
-          helloaaa
-        </ButtonText>
-      </Button>
+    <Button>
+      <ButtonText>helloaaa</ButtonText>
+    </Button>
   );
 };
 

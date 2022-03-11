@@ -12,20 +12,17 @@ const ButtonContextProvider: Component = (props) => {
 
 const useButtonContext = () => {
   return useContext(ButtonContext);
-}
+};
 
 const Button: Component = (props) => {
   return (
     <ButtonContextProvider>
-      <button>
-        {props.children}
-      </button>
+      <button>{props.children}</button>
     </ButtonContextProvider>
   );
 };
 
 const ButtonText: Component = (props) => {
-
   const context = useButtonContext();
 
   // expect this context to not be undefined.
@@ -34,11 +31,7 @@ const ButtonText: Component = (props) => {
     console.log(context);
   });
 
-  return (
-    <span>
-      {props.children}
-    </span>
-  );
+  return <span>{props.children}</span>;
 };
 
 const Root = Button;
@@ -49,5 +42,5 @@ export {
   ButtonText,
   //
   Root,
-  Text
+  Text,
 };
