@@ -1,38 +1,73 @@
-import { Component, createContext, onMount, useContext } from "solid-js";
+import { Component, createContext, onMount, useContext, children } from "solid-js";
+import { createStore } from "solid-js/store";
 
-const ButtonContext = createContext();
+/** ------------------------------------------------------------
+ * Common Types
+ -------------------------------------------------------------*/
+type ButtonContextValue = [{
+  buttonText: string
+}, {
+  updateButtonText: (buttonText: string) => void;
+}]
 
-const ButtonContextProvider: Component = (props) => {
-  return (
-    <ButtonContext.Provider value={{ foo: "bar" }}>
-      {props.children}
-    </ButtonContext.Provider>
-  );
-};
+/** ------------------------------------------------------------
+ * Button Context
+ -------------------------------------------------------------*/
+const ButtonContext = createContext<ButtonContextValue>();
 
 const useButtonContext = () => {
   return useContext(ButtonContext);
 };
 
+/** ------------------------------------------------------------
+ * Button
+ -------------------------------------------------------------*/
 const Button: Component = (props) => {
+
+  const [state, setState] = createStore({
+    buttonText: ""
+  });
+
+  const store: ButtonContextValue = [
+    state,
+  {
+    updateButtonText: (buttonText: string) => {
+      setState("buttonText", buttonText);
+    }
+  }];
+
   return (
-    <ButtonContextProvider>
-      <button>{props.children}</button>
-    </ButtonContextProvider>
+    <ButtonContext.Provider value={store}>
+      <button aria-label={state.buttonText}>{props.children}</button>
+    </ButtonContext.Provider>
   );
 };
 
-const ButtonText: Component = (props) => {
+/** ------------------------------------------------------------
+ * Button Text
+ -------------------------------------------------------------*/
+interface ButtonTextProps {
+  children: string;
+}
+ 
+const ButtonText: Component<ButtonTextProps> = (props) => {
   const context = useButtonContext();
 
-  // expect this context to not be undefined.
+  const buttonText = children(() => props.children);
 
   onMount(() => {
-    console.log(context);
+    if (context) {
+      context[1].updateButtonText(buttonText() as string);
+    }
   });
 
-  return <span>{props.children}</span>;
+  return <span>{buttonText}</span>;
 };
+
+
+/** ------------------------------------------------------------
+ * exports
+ -------------------------------------------------------------*/
 
 const Root = Button;
 const Text = ButtonText;
