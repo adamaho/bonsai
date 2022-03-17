@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@bonsai/solid-button": "workspace:*",
+    "@bonsai/solid-slot": "workspace:*",
     "solid-js": "1.3.12"
   }
 }

@@ -88,7 +88,8 @@ const Button: Component<ButtonProps> = (props) => {
 /** ------------------------------------------------------------
  * Button Text
  -------------------------------------------------------------*/
-type ButtonTextElementProps = ComponentProps<typeof Dynamic>;
+type ButtonTextElementProps = ComponentProps<typeof Dynamic> &
+  JSX.HTMLAttributes<HTMLSpanElement>;
 
 interface ButtonTextProps extends ButtonTextElementProps {
   children: string;
@@ -100,7 +101,7 @@ const ButtonText: Component<ButtonTextProps> = (props) => {
 
   const buttonText = children(() => props.children);
 
-  onMount(() => {
+  createComputed(() => {
     context?.[1].updateButtonText(buttonText() as string);
   });
 
@@ -114,7 +115,8 @@ const ButtonText: Component<ButtonTextProps> = (props) => {
 /** ------------------------------------------------------------
  * Button Loading
  -------------------------------------------------------------*/
-type ButtonLoadingElementProps = ComponentProps<typeof Dynamic>;
+type ButtonLoadingElementProps = ComponentProps<typeof Dynamic> &
+  JSX.HTMLAttributes<HTMLSpanElement>;
 
 interface ButtonLoadingProps extends ButtonLoadingElementProps {
   ref?: HTMLSpanElement;

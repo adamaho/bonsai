@@ -1,7 +1,9 @@
 import type { Component } from "solid-js";
 import { createSignal } from "solid-js";
 
-import { Button, ButtonText, ButtonLoading } from "@bonsai/solid-button";
+import { Button, ButtonText } from "@bonsai/solid-button";
+
+import { Slot } from "@bonsai/solid-slot";
 
 const App: Component = () => {
   const [isLoading, setIsLoading] = createSignal(false);
@@ -11,8 +13,10 @@ const App: Component = () => {
     <>
       <Button isLoading={isLoading()} isDisabled={isDisabled()}>
         <ButtonText>helloaaa</ButtonText>
-        <ButtonLoading>Loading</ButtonLoading>
       </Button>
+      <Slot>
+        <p>asd</p>
+      </Slot>
       <button onClick={() => setIsLoading((prev) => !prev)}>
         toggle loading
       </button>
