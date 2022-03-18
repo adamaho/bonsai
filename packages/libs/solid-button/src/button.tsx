@@ -5,6 +5,7 @@ import {
   children,
   Show,
   createComputed,
+  splitProps,
 } from "solid-js";
 import type { Component, JSX, ComponentProps } from "solid-js";
 
@@ -46,10 +47,13 @@ interface ButtonProps extends ButtonElementProps {
 }
 
 const Button: Component<ButtonProps> = (props) => {
+
+  const [local, rest] = splitProps(props, ["isDisabled", "isLoading", "ref"]);
+
   const [state, setState] = createStore({
     buttonText: "",
-    isDisabled: props?.isDisabled || false,
-    isLoading: props?.isLoading || false,
+    isDisabled: local?.isDisabled || false,
+    isLoading: local?.isLoading || false,
   });
 
   const store: ButtonContextValue = [
@@ -63,21 +67,22 @@ const Button: Component<ButtonProps> = (props) => {
 
   // update the loading state based on props
   createComputed(() => {
-    setState("isLoading", props?.isLoading || false);
+    setState("isLoading", local?.isLoading || false);
   });
 
   // update the loading state based on props
   createComputed(() => {
-    setState("isDisabled", props?.isDisabled || false);
+    setState("isDisabled", local?.isDisabled || false);
   });
 
   return (
     <ButtonContext.Provider value={store}>
       <button
+        {...rest}
         aria-label={state.buttonText}
         data-state-loading={state.isLoading}
         disabled={state.isDisabled}
-        ref={props.ref}
+        ref={local.ref}
       >
         {props.children}
       </button>
